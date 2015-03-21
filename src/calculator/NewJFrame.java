@@ -6,7 +6,6 @@
 package calculator;
 
 import java.awt.Color;
-import java.text.DecimalFormat;
 
 /**
  *
@@ -14,19 +13,22 @@ import java.text.DecimalFormat;
  */
 public class NewJFrame extends javax.swing.JFrame {
     
+    
 String s = "", s1 = "";
     int n=0;
     int check=0;
-    //Variables
+ //Variables
     double plusminus;
-    double firstDouble;
+    double firtDouble;
     double secondDouble;
     double totalDouble;
-    //to check for button clicks
+    //to check for buttun clicks
     int plusClick;
     int minusClick;
     int multiplyClick;
     int divideClick;
+    int decimalClick;
+    
     
     /**
      * Creates new form NewJFrame
@@ -318,6 +320,11 @@ String s = "", s1 = "";
         jMenu4.add(jMenuItem1);
 
         jMenuItem5.setText("Scientific");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem5);
 
         jMenu1.setText("Color");
@@ -356,7 +363,13 @@ String s = "", s1 = "";
 
         jMenu4.add(jMenu1);
 
+        jMenuItem6.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem6.setText("Close");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem6);
 
         jMenuBar2.add(jMenu4);
@@ -520,12 +533,14 @@ String s = "", s1 = "";
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        // TODO add your handling code here:
+    s = s + ')';
+        s1 = s1 + ')';
+        display.setText(s1);
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-    s = s + ")";
-        s1 = s1 + ")";
+    s = s + '(';
+        s1 = s1 + '(';
         display.setText(s1);
     }//GEN-LAST:event_jButton10ActionPerformed
 
@@ -576,8 +591,8 @@ String s = "", s1 = "";
     }//GEN-LAST:event_jButton18ActionPerformed
 
     private void divideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_divideActionPerformed
-    s = s + "/";
-        s1 = s1 + "/";
+    s = s + '/';
+        s1 = s1 + '/';
         display.setText(s1);
     }//GEN-LAST:event_divideActionPerformed
 
@@ -588,8 +603,8 @@ String s = "", s1 = "";
     }//GEN-LAST:event_jButton20ActionPerformed
 
     private void multiplyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multiplyActionPerformed
-    s = s + "*";
-        s1 = s1 + "*";
+     s = s + '*';
+        s1 = s1 + '*';
         display.setText(s1);
     }//GEN-LAST:event_multiplyActionPerformed
 
@@ -602,24 +617,24 @@ String s = "", s1 = "";
     private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
     s = s + 2;
         s1 = s1 + 2;
-        display.setText(s1); 
+        display.setText(s1);
     }//GEN-LAST:event_jButton23ActionPerformed
 
     private void minusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_minusActionPerformed
-    s = s + "-";
-        s1 = s1 + "-";
+    s = s + '-';
+        s1 = s1 + '-';
         display.setText(s1);
     }//GEN-LAST:event_minusActionPerformed
 
     private void decimalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_decimalActionPerformed
-    s = s + ".";
-        s1 = s1 + ".";
+    s = s + '.';
+        s1 = s1 + '.';
         display.setText(s1);
     }//GEN-LAST:event_decimalActionPerformed
 
     private void plusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_plusActionPerformed
-    s = s + "+";
-        s1 = s1 + "+";
+   s = s + '+';
+        s1 = s1 + '+';
         display.setText(s1);
     }//GEN-LAST:event_plusActionPerformed
 
@@ -635,8 +650,17 @@ String s = "", s1 = "";
         display.setText(s1);
     }//GEN-LAST:event_jButton28ActionPerformed
 
+@SuppressWarnings("SillyAssignment")
     private void equalsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_equalsActionPerformed
-   
+     String elementMath[] = null, value;
+        InfixToPostfix IFP = new InfixToPostfix();
+        elementMath = IFP.processString(s);
+        elementMath = IFP.postfix(elementMath);
+        value = IFP.valueMath(elementMath);
+        if(check==0){
+            value=value;
+            display.setText(value);
+}
     }//GEN-LAST:event_equalsActionPerformed
 
     private void clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearActionPerformed
@@ -646,7 +670,7 @@ String s = "", s1 = "";
     }//GEN-LAST:event_clearActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-    s = s + 5;
+   s = s + 5;
         s1 = s1 + 5;
         display.setText(s1);
     }//GEN-LAST:event_jButton5ActionPerformed
@@ -674,6 +698,14 @@ String s = "", s1 = "";
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
     
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+    System.exit(0);
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+    
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -760,4 +792,10 @@ String s = "", s1 = "";
     private javax.swing.JButton multiply;
     private javax.swing.JButton plus;
     // End of variables declaration//GEN-END:variables
+
+    private static class string {
+
+        public string() {
+        }
+    }
 }
